@@ -20,3 +20,6 @@ public class DBUtil {
         return emf;
     }
 }
+
+
+///[index, new, create, show, edit, update, destroy]  making 7 sevlet
