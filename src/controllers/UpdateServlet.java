@@ -37,7 +37,7 @@ public class UpdateServlet extends HttpServlet {
 
             // セッションスコープからメッセージのIDを取得して
             // 該当のIDのメッセージ1件のみをデータベースから取得
-            Message m = em.find(Message.class, (Integer)(request.getSession().getAttribute("message_id")));
+            Message m = em.find(Message.class, (Integer)(request.getSession().getAttribute("message_id")));// message_id in EditServlet
 
             // フォームの内容を各フィールドに上書き
             String title = request.getParameter("title");
@@ -59,6 +59,7 @@ public class UpdateServlet extends HttpServlet {
 
             // indexページへリダイレクト
             response.sendRedirect(request.getContextPath() + "/index");
+//            request.getContextPath() returns request url   => http://localhost:8080/message_board
         }
     }
 }

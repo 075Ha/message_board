@@ -14,16 +14,16 @@ import models.Message;
 import utils.DBUtil;
 
 /**
- * Servlet implementation class ShowServlet
+ * Servlet implementation class EditServlet
  */
-@WebServlet("/show")
-public class ShowServlet extends HttpServlet {
-        private static final long serialVersionUID = 1L;
+@WebServlet("/edit")
+public class EditServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ShowServlet() {
+    public EditServlet() {
         super();
     }
 
@@ -38,10 +38,14 @@ public class ShowServlet extends HttpServlet {
 
         em.close();
 
-        // メッセージデータをリクエストスコープにセットしてshow.jspを呼び出す
-        request.setAttribute("message", m);//set m to message, so show.jsp using this m
+        // メッセージ情報とセッションIDをリクエストスコープに登録
+        request.setAttribute("message", m);
+        request.setAttribute("_token", request.getSession().getId());
 
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/messages/show.jsp");
+        // メッセージIDをセッションスコープに登録
+        request.getSession().setAttribute("message_id", m.getId());//making a new session as name "massage_id" and put a m.getId() in the session;
+
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/messages/edit.jsp");
         rd.forward(request, response);
     }
 }

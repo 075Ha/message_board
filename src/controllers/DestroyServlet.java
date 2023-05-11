@@ -36,8 +36,8 @@ public class DestroyServlet extends HttpServlet {
 
             // セッションスコープからメッセージのIDを取得して
             // 該当のIDのメッセージ1件のみをデータベースから取得
-            Message m = em.find(Message.class, (Integer)(request.getSession().getAttribute("message_id")));
-
+            Message m = em.find(Message.class, (Integer)(request.getSession().getAttribute("message_id")));// session id = message_id was enrolled on editServlet, this servlet using it to find specific message to destroy
+            // if message doesn't need anymore, delete its session by using 39 - 47, and sending and sending the result if necessary
             em.getTransaction().begin();
             em.remove(m);       // データ削除
             em.getTransaction().commit();
